@@ -49,19 +49,28 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
         child: _homeListView(context),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
+        },
+        child: const Text("+"),
+      ),
     );
   }
 }
 /// TODO: Cho tất cả các task trong một màn hình thành một đối tượng TaskController,
-/// cho tối đượng todo bằng list các taskCOntroller .
+/// cho tối đượng todo bằng list các taskController .
 /// Sau đó hiển thị ra màn hình
 Widget _homeListView(BuildContext context) {
-  List<Task> tasks = Provider.of<TaskController>(context, listen: false).tasks;
+  List<TaskController> tasks = Provider.of<TodoController>(context, listen: false).list;
   return ListView.builder(
     itemCount: tasks.length,
     itemBuilder: (context, index) {
       return ListTile(
-        title: Text(tasks[index].name),
+        title: Text(tasks[index].todoName),
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
+        },
       );
     },
   );
