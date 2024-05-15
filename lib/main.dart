@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_final/Firebase/widget_connect_firebase.dart';
 import 'package:project_final/todo_app/controller/task_controller.dart';
+import 'package:project_final/todo_app/model/task.dart';
 import 'package:project_final/todo_app/view/home_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -51,14 +52,16 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
+/// TODO: Cho tất cả các task trong một màn hình thành một đối tượng TaskController,
+/// cho tối đượng todo bằng list các taskCOntroller .
+/// Sau đó hiển thị ra màn hình
 Widget _homeListView(BuildContext context) {
-  final test = ["a", "b", "c"];
+  List<Task> tasks = Provider.of<TaskController>(context, listen: false).tasks;
   return ListView.builder(
-    itemCount: test.length,
+    itemCount: tasks.length,
     itemBuilder: (context, index) {
       return ListTile(
-        title: Text(test[index]),
+        title: Text(tasks[index].name),
       );
     },
   );
