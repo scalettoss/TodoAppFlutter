@@ -28,16 +28,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
       ),
     );
-    return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: MyFirebaseConnect(
-            errorMessage: "Kết nối không thành công",
-            connectingMessage: "Đang kết nối",
-            builder: (context) => HomeScreen()));
   }
 }
 
