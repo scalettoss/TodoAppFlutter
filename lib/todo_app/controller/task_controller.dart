@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_final/todo_app/model/task.dart';
 
 class TaskController extends ChangeNotifier {
+  String todoName = "";
   List<Task> tasks = [];
   final TextEditingController _controller = TextEditingController();
 
@@ -16,6 +17,9 @@ class TaskController extends ChangeNotifier {
     }
   }
 
+  void changeTodoName(String value) {
+    todoName = value;
+  }
   void toggleTaskCompletion(int index, bool? value) {
     tasks[index].isCompleted = value ?? false;
     notifyListeners();
