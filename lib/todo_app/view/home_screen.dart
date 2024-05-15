@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:project_final/todo_app/model/task.dart';
 import 'package:provider/provider.dart';
 import 'package:project_final/todo_app/controller/task_controller.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +13,6 @@ class HomeScreen extends StatelessWidget {
           decoration: const InputDecoration(label: Text("Tiêu đề")),
           onSubmitted: (value) {
             Provider.of<TaskController>(context, listen: false).changeTodoName(value);
-            print(Provider.of<TaskController>(context, listen: false).todoName);
           },
         ),
 
