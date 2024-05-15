@@ -12,10 +12,10 @@ class HomeScreen extends StatelessWidget {
         title: TextField(
           decoration: const InputDecoration(label: Text("Tiêu đề")),
           onSubmitted: (value) {
-            Provider.of<TaskController>(context, listen: false).changeTodoName(value);
+            Provider.of<TaskController>(context, listen: false)
+                .changeTodoName(value);
           },
         ),
-
       ),
       body: Column(
         children: [
