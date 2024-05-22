@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_final/Firebase/widget_connect_firebase.dart';
 import 'package:project_final/todo_app/controller/task_controller.dart';
 import 'package:project_final/todo_app/view/home_screen.dart';
+import 'package:project_final/todo_app/view/newhomescreen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -24,10 +25,9 @@ class MyApp extends StatelessWidget {
         home:MyFirebaseConnect(
             errorMessage: "Kết nối không thành công",
             connectingMessage: "Đang kết nối",
-            builder: (context) => MyHomePage()),
+            builder: (context) => NewHomeScreen()),
         debugShowCheckedModeBanner: false,
       ),
     );
   }
 }
-
