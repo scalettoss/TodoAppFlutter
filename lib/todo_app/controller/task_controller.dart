@@ -64,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text("To do app"),
       ),
-      body: SingleChildScrollView(
+      body: Expanded(
         child: _homeListView(context),
       ),
       floatingActionButton: FloatingActionButton(
@@ -81,16 +81,13 @@ class _MyHomePageState extends State<MyHomePage> {
 /// cho tối đượng todo bằng list các taskController .
 /// Sau đó hiển thị ra màn hình
 Widget _homeListView(BuildContext context) {
-  List<TaskController> tasks = TodoController().list;
-  return ListView.builder(
-    itemCount: tasks.length,
-    itemBuilder: (context, index) {
-      return ListTile(
-        title: Text(tasks[index].todoName),
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
-        },
-      );
-    },
+  // List<TaskController> tasks = Provider.of<TodoController>(context, listen: false).list;
+  List<String> tasks = ["A"];
+  return ListView.separated(
+      itemBuilder: (context, index) => ListTile(
+        title: Text(tasks[index]),
+      ),
+      separatorBuilder: (context, index) => const Divider(thickness: 5  ,),
+      itemCount: tasks.length
   );
 }
