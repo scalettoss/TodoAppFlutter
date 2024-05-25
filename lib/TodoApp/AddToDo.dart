@@ -15,7 +15,7 @@ class _AddToDoPageState extends State<AddToDoPage> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
               Color(0xff1d1e26),
@@ -27,12 +27,12 @@ class _AddToDoPageState extends State<AddToDoPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               IconButton(
                   onPressed: () {
-              }, icon: Icon(
+              }, icon: const Icon(
                 CupertinoIcons.arrow_left,
                      color:  Colors.white,
                      size: 28,
@@ -45,7 +45,7 @@ class _AddToDoPageState extends State<AddToDoPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "Create Task",
                         style: TextStyle(
                           fontSize: 33,
@@ -53,8 +53,8 @@ class _AddToDoPageState extends State<AddToDoPage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 25,),
-                      Text(
+                      const SizedBox(height: 25,),
+                      const Text(
                         "Title",
                         style: TextStyle(
                           fontSize: 20,
@@ -62,20 +62,20 @@ class _AddToDoPageState extends State<AddToDoPage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 5,),
+                      const SizedBox(height: 5,),
                       Container(
                         height: 55,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
-                          color: Color(0xff2a2e3d),
+                          color: const Color(0xff2a2e3d),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: TextFormField(
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.grey,
                             fontSize: 17
                           ),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             hintText: "Input Your Task",
                             hintStyle: TextStyle(
@@ -86,8 +86,8 @@ class _AddToDoPageState extends State<AddToDoPage> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 25,),
-                      Text(
+                      const SizedBox(height: 25,),
+                      const Text(
                         "Descreption",
                         style: TextStyle(
                           fontSize: 20,
@@ -95,21 +95,21 @@ class _AddToDoPageState extends State<AddToDoPage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 5,),
+                      const SizedBox(height: 5,),
                       Container(
                         height: 155,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
-                          color: Color(0xff2a2e3d),
+                          color: const Color(0xff2a2e3d),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: TextFormField(
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.grey,
                               fontSize: 17
                           ),
                           maxLines: null,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               border: InputBorder.none,
                               hintText: "Input Your Descreption",
                               hintStyle: TextStyle(
@@ -121,20 +121,20 @@ class _AddToDoPageState extends State<AddToDoPage> {
                         ),
                       ),
                       /// Thêm nút chọn ngày giờ
-                      SizedBox(height: 55,),
+                      const SizedBox(height: 55,),
                       Container(
                         height: 56,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             colors: [
                               Color(0xff8a32f1),
                               Color(0xffad32f9)
                             ],
                           )
                         ),
-                        child: Center(child: Text("Add Todo",
+                        child: const Center(child: Text("Add Todo",
                           style: TextStyle(color: Colors.white),
                         ),),
                       )
