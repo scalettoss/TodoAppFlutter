@@ -120,15 +120,15 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
             return const Center(child: CircularProgressIndicator());
           }
 
-           var docs = snapshot.data!.docs;
-           var toDoSnapshotList = docs.map((doc) => ToDoSnapshot.fromMap(doc)).toList();
-          //  var toDoSnapshotList = snapshot.data as List<ToDoSnapshot>;
+           // var docs = snapshot.data!.docs;
+           // var toDoSnapshotList = docs.map((doc) => ToDoSnapshot.fromMap(doc)).toList();
+           var toDoSnapshotList = snapshot.data as List<ToDoSnapshot>;
 
           return ListView.builder(
             itemCount: toDoSnapshotList.length,
             itemBuilder: (context, index) {
-              // var item = toDoSnapshotList[index];
-              var item = ToDoSnapshot.fromMap(docs[index]);
+              var item = toDoSnapshotList[index];
+              // var item = ToDoSnapshot.fromMap(docs[index]);
               return Card(
                 child: ListTile(
                   title: Text(item.toDoTask.topic!),
@@ -158,4 +158,9 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
       ),
     );
   }
+}
+void main() {
+  runApp(MaterialApp(
+    home: HomeTodoApp(),
+  ));
 }

@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         home:MyFirebaseConnect(
             errorMessage: "Kết nối không thành công",
             connectingMessage: "Đang kết nối",
-            builder: (context) => const MyHomePage(title: "title")),
+            builder: (context) => MyHomePage(title: "title")),
         debugShowCheckedModeBanner: false,
       ),
     );
@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen(),));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
         },
         child: const Text("+"),
       ),
@@ -68,7 +68,7 @@ Widget _homeListView(BuildContext context) {
       return ListTile(
         title: Text(tasks[index].todoName),
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen(),));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
         },
       );
     },
