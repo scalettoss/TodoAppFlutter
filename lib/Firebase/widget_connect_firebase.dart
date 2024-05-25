@@ -24,7 +24,7 @@ class _MyFirebaseConnectState extends State<MyFirebaseConnect> {
         Container(
           color: Colors.white,
           child: Center(
-            child: Text(widget.errorMessage, style: TextStyle(fontSize: 16, color: Colors.red),
+            child: Text(widget.errorMessage, style: const TextStyle(fontSize: 16, color: Colors.red),
               textDirection: TextDirection.ltr,),
           ),
         );
@@ -37,14 +37,16 @@ class _MyFirebaseConnectState extends State<MyFirebaseConnect> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircularProgressIndicator(),
-                Text(widget.connectingMessage, style: TextStyle(fontSize: 16), textDirection: TextDirection.ltr,)
+                const CircularProgressIndicator(),
+                Text(widget.connectingMessage, style: const TextStyle(fontSize: 16), textDirection: TextDirection.ltr,)
               ],
             ),
           ),
         );
     }
-    else return widget.builder(context);
+    else {
+      return widget.builder(context);
+    }
   }
   @override
   void initState(){
