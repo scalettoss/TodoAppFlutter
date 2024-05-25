@@ -159,8 +159,3 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
     );
   }
 }
-void main() {
-  runApp(MaterialApp(
-    home: HomeTodoApp(),
-  ));
-}
