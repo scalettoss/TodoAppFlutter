@@ -2,16 +2,22 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:project_final/todo_app/model/task.dart';
-
+import 'package:project_final/todo_app/view/newhomescreen.dart';
 
 class HomeTodoApp extends StatefulWidget {
+
   const HomeTodoApp({super.key});
+=======
+  const HomeTodoApp({super.key, required this.title});
+  final String title;
+
 
   @override
   _HomeTodoAppState createState() => _HomeTodoAppState();
 }
 
 class _HomeTodoAppState extends State<HomeTodoApp> {
+
 
   final TextEditingController txtnameTopic = TextEditingController();
   TimeOfDay selectedTime = TimeOfDay.now();
@@ -98,7 +104,17 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
     String userName = "";
     return Scaffold(
       appBar: AppBar(
+
         title: const Text("Home App Todo"),
+
+        title: Text(widget.title),
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          onPressed: () {
+            // Nút menu chưa có chức năng
+          },
+        ),
+
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.add),
@@ -172,6 +188,10 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
                       ),
                     ],
                   ),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute
+                      (builder: (context) => AddNewTask(topic : item.toDoTask.topic),));
+                  },
                 ),
               );
             },
