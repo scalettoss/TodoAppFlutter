@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:project_final/todo_app/model/task.dart';
-
+import 'package:project_final/todo_app/view/newhomescreen.dart';
 
 class HomeTodoApp extends StatefulWidget {
-  const HomeTodoApp({Key? key}) : super(key: key);
+  const HomeTodoApp({super.key, required this.title});
+  final String title;
 
   @override
   _HomeTodoAppState createState() => _HomeTodoAppState();
 }
 
 class _HomeTodoAppState extends State<HomeTodoApp> {
+
 
   final TextEditingController txtnameTopic = TextEditingController();
   TimeOfDay selectedTime = TimeOfDay.now();
@@ -94,7 +96,7 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home App Todo"),
+        title: Text(widget.title),
         leading: IconButton(
           icon: Icon(Icons.menu),
           onPressed: () {
@@ -150,6 +152,10 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
                       ),
                     ],
                   ),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute
+                      (builder: (context) => AddNewTask(topic : item.toDoTask.topic),));
+                  },
                 ),
               );
             },
