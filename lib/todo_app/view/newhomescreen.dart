@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:project_final/todo_app/model/task.dart';
-import 'package:provider/provider.dart';
-import 'package:project_final/todo_app/controller/task_controller.dart';
 
 class NewHomeScreen extends StatefulWidget {
   const NewHomeScreen({super.key});
@@ -20,7 +17,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Page"),
+        title: const Text("Home Page"),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
 
@@ -31,17 +28,17 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
             child: Row(
               children: [
                 Expanded(
-                    child: Container(
+                    child: SizedBox(
                       height: 55,
                       width: MediaQuery.of(context).size.width,
                       child: TextFormField(
                         controller: txtnameTask,
-                        decoration: InputDecoration(
-                          hintText: "Nhap nhiem vu moi",
+                        decoration: const InputDecoration(
+                          hintText: "Nhập nhiệm vụ mới",
                         ),
                         validator: (value){
                           if (value == null || value.isEmpty) {
-                            return 'Vui long nhap nhiem vu';
+                            return 'Vui lòng nhập nhiệm vụ';
                           }
                           return null;
                         },
@@ -70,10 +67,10 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
               stream: FirebaseFirestore.instance.collection("ToDoDB").snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
-                  return Center(child: Text("Error Data"),);
+                  return const Center(child: Text("Error Data"),);
                 }
                 if (!snapshot.hasData) {
-                  return Center(child: CircularProgressIndicator(),);
+                  return const Center(child: CircularProgressIndicator(),);
                 }
                 var docs = snapshot.data!.docs;
                 var toDoSnapshotList = docs.map((doc) => ToDoSnapshot.fromMap(doc)).toList();
