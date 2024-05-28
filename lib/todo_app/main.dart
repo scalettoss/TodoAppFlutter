@@ -27,12 +27,62 @@ class MyApp extends StatelessWidget {
         home:MyFirebaseConnect(
             errorMessage: "Kết nối không thành công",
             connectingMessage: "Đang kết nối",
+
+            builder: (context) => const MyHomePage(title: "title")),
+
             builder: (context) => HomeTodoApp(title: "Home Todo")),
+
         debugShowCheckedModeBanner: false,
       ),
     );
   }
 }
+
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+  final String title;
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("To do app"),
+      ),
+      body: SingleChildScrollView(
+        child: _homeListView(context),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen(),));
+        },
+        child: const Text("+"),
+      ),
+    );
+  }
+}
+/// TODO: Cho tất cả các task trong một màn hình thành một đối tượng TaskController,
+/// cho tối đượng todo bằng list các taskController .
+/// Sau đó hiển thị ra màn hình
+Widget _homeListView(BuildContext context) {
+  List<TaskController> tasks = Provider.of<TodoController>(context, listen: false).list;
+  return ListView.builder(
+    itemCount: tasks.length,
+    itemBuilder: (context, index) {
+      return ListTile(
+        title: Text(tasks[index].todoName),
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen(),));
+        },
+      );
+    },
+  );
+}
+=======
 //
 // class MyHomePage extends StatefulWidget {
 //   const MyHomePage({super.key, required this.title});
@@ -77,3 +127,4 @@ class MyApp extends StatelessWidget {
 //     },
 //   );
 // }
+>>>>

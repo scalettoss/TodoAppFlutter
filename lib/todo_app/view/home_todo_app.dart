@@ -1,13 +1,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart';
 import 'package:project_final/todo_app/model/task.dart';
 import 'package:project_final/todo_app/view/newhomescreen.dart';
 
 class HomeTodoApp extends StatefulWidget {
+
+  const HomeTodoApp({super.key});
+=======
   const HomeTodoApp({super.key, required this.title});
   final String title;
+
 
   @override
   _HomeTodoAppState createState() => _HomeTodoAppState();
@@ -31,15 +34,15 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Nhập Dữ Liệu"),
+          title: const Text("Nhập Dữ Liệu"),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               TextField(
                 controller: txtnameTopic,
-                decoration: InputDecoration(labelText: 'Nhập dữ liệu'),
+                decoration: const InputDecoration(labelText: 'Nhập dữ liệu'),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextButton(
                 onPressed: () async {
                   TimeOfDay? picked = await showTimePicker(
@@ -52,7 +55,7 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
                     });
                   }
                 },
-                child: Text('Chọn thời gian'),
+                child: const Text('Chọn thời gian'),
               ),
             ],
           ),
@@ -61,7 +64,7 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Hủy'),
+              child: const Text('Hủy'),
             ),
             TextButton(
               onPressed: () async {
@@ -83,8 +86,11 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
                 }
 
                 Navigator.of(context).pop();
+                setState(() {
+
+                });
               },
-              child: Text('Lưu'),
+              child: const Text('Lưu'),
             ),
           ],
         );
@@ -94,8 +100,13 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
 
   @override
   Widget build(BuildContext context) {
+    int numberOfTodo = 0;
+    String userName = "";
     return Scaffold(
       appBar: AppBar(
+
+        title: const Text("Home App Todo"),
+
         title: Text(widget.title),
         leading: IconButton(
           icon: Icon(Icons.menu),
@@ -103,14 +114,39 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
             // Nút menu chưa có chức năng
           },
         ),
+
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
             onPressed: () {
               _showInputDialog(context);
             },
           ),
         ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            UserAccountsDrawerHeader(
+              accountName: TextField(
+                onSubmitted: (value) {
+                  userName = value;
+                },
+
+                decoration: const InputDecoration(label: Text("Người dùng")),
+                maxLines: 1,
+              ),
+              accountEmail: null, // Email người dùng
+              currentAccountPicture: const Icon(Icons.face),
+            ),
+            ListTile(
+              title: Text("Số lượng todo hiện tại: $numberOfTodo"),
+              leading: const Icon(Icons.numbers),
+
+            )
+          ],
+        ),
       ),
       body: StreamBuilder<List<ToDoSnapshot>>(
         stream: ToDoSnapshot.getAll(),
@@ -125,7 +161,7 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
            // var docs = snapshot.data!.docs;
            // var toDoSnapshotList = docs.map((doc) => ToDoSnapshot.fromMap(doc)).toList();
            var toDoSnapshotList = snapshot.data as List<ToDoSnapshot>;
-
+          numberOfTodo = toDoSnapshotList.length;
           return ListView.builder(
             itemCount: toDoSnapshotList.length,
             itemBuilder: (context, index) {
@@ -139,13 +175,13 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
-                        icon: Icon(Icons.edit),
+                        icon: const Icon(Icons.edit),
                         onPressed: () {
                           _showInputDialog(context, snapshot: item);
                         },
                       ),
                       IconButton(
-                        icon: Icon(Icons.delete),
+                        icon: const Icon(Icons.delete),
                         onPressed: () async {
                           await item.xoa();
                         },
