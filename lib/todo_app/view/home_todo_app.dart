@@ -1,13 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart';
 import 'package:project_final/todo_app/model/task.dart';
-import '';
 
 
 class HomeTodoApp extends StatefulWidget {
-  const HomeTodoApp({Key? key}) : super(key: key);
+  const HomeTodoApp({super.key});
 
   @override
   _HomeTodoAppState createState() => _HomeTodoAppState();
@@ -83,7 +81,7 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
 
                 Navigator.of(context).pop();
                 setState(() {
-                  
+
                 });
               },
               child: const Text('Lưu'),
@@ -96,8 +94,8 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
 
   @override
   Widget build(BuildContext context) {
-    int number_of_todo = 0;
-    String user_name = "";
+    int numberOfTodo = 0;
+    String userName = "";
     return Scaffold(
       appBar: AppBar(
         title: const Text("Home App Todo"),
@@ -117,7 +115,7 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
             UserAccountsDrawerHeader(
               accountName: TextField(
                 onSubmitted: (value) {
-                  user_name = value;
+                  userName = value;
                 },
 
                 decoration: const InputDecoration(label: Text("Người dùng")),
@@ -127,7 +125,7 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
               currentAccountPicture: const Icon(Icons.face),
             ),
             ListTile(
-              title: Text("Số lượng todo hiện tại: $number_of_todo"),
+              title: Text("Số lượng todo hiện tại: $numberOfTodo"),
               leading: const Icon(Icons.numbers),
 
             )
@@ -147,7 +145,7 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
            // var docs = snapshot.data!.docs;
            // var toDoSnapshotList = docs.map((doc) => ToDoSnapshot.fromMap(doc)).toList();
            var toDoSnapshotList = snapshot.data as List<ToDoSnapshot>;
-          number_of_todo = toDoSnapshotList.length;
+          numberOfTodo = toDoSnapshotList.length;
           return ListView.builder(
             itemCount: toDoSnapshotList.length,
             itemBuilder: (context, index) {
