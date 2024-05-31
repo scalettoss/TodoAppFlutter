@@ -1,26 +1,36 @@
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:project_final/todo_app/model/task.dart';
-import 'package:project_final/todo_app/view/newhomescreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeTodoApp extends StatefulWidget {
-
-  const HomeTodoApp({super.key});
-=======
   const HomeTodoApp({super.key, required this.title});
   final String title;
-
 
   @override
   _HomeTodoAppState createState() => _HomeTodoAppState();
 }
 
 class _HomeTodoAppState extends State<HomeTodoApp> {
-
-
   final TextEditingController txtnameTopic = TextEditingController();
   TimeOfDay selectedTime = TimeOfDay.now();
+  bool hienThiInputName = false;
+  Future<String> _getUserNameFromSP() async {
+    final prefs = await SharedPreferences.getInstance();
+    String userName = "";
+    userName = prefs.getString('userName') ?? "";
+    return userName;
+  }
+
+  void _setUserNameToSP(String userName) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('userName', userName);
+  }
+
+  void _removeUserNameFromSP() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('userName');
+  }
 
   void _showInputDialog(BuildContext context, {ToDoSnapshot? snapshot}) {
     if (snapshot != null) {
@@ -72,7 +82,6 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
                 String newnametopic = txtnameTopic.text;
 
                 if (snapshot != null) {
-
                   await snapshot.ref.update({
                     'topic': newnametopic,
                     'time': time,
@@ -86,9 +95,7 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
                 }
 
                 Navigator.of(context).pop();
-                setState(() {
-
-                });
+                setState(() {});
               },
               child: const Text('Lưu'),
             ),
@@ -98,23 +105,41 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
     );
   }
 
+  Widget _inputName() {
+    if (!hienThiInputName) {
+      return ListTile(
+        title: const Text("Thay đổi tên người dùng"),
+        leading: const Icon(Icons.people),
+        onTap: () {
+          _removeUserNameFromSP();
+          setState(() {
+            hienThiInputName = true;
+          });
+        },
+      );
+    } else {
+      return TextField(
+        onSubmitted: (value) {
+          _setUserNameToSP(value);
+          setState(() {
+            hienThiInputName = false;
+          });
+        },
+        decoration: const InputDecoration(label: Text("Người dùng")),
+        maxLines: 1,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     int numberOfTodo = 0;
-    String userName = "";
+    Future<String> userName = _getUserNameFromSP();
+    String userName0 = "";
+    userName.then((value) => userName0 = value);
     return Scaffold(
       appBar: AppBar(
-
         title: const Text("Home App Todo"),
-
-        title: Text(widget.title),
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {
-            // Nút menu chưa có chức năng
-          },
-        ),
-
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.add),
@@ -129,22 +154,24 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
           padding: EdgeInsets.zero,
           children: [
             UserAccountsDrawerHeader(
-              accountName: TextField(
-                onSubmitted: (value) {
-                  userName = value;
+              accountName: FutureBuilder(
+                future: userName,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Text(userName0);
+                  } else if (snapshot.hasError)
+                    return const Text("Error");
+                  else
+                    return const CircularProgressIndicator();
                 },
-
-                decoration: const InputDecoration(label: Text("Người dùng")),
-                maxLines: 1,
               ),
-              accountEmail: null, // Email người dùng
-              currentAccountPicture: const Icon(Icons.face),
+              accountEmail: const Text("email"),
             ),
             ListTile(
               title: Text("Số lượng todo hiện tại: $numberOfTodo"),
               leading: const Icon(Icons.numbers),
-
-            )
+            ),
+            _inputName(),
           ],
         ),
       ),
@@ -157,10 +184,9 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
           if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
           }
-
-           // var docs = snapshot.data!.docs;
-           // var toDoSnapshotList = docs.map((doc) => ToDoSnapshot.fromMap(doc)).toList();
-           var toDoSnapshotList = snapshot.data as List<ToDoSnapshot>;
+          // var docs = snapshot.data!.docs;
+          // var toDoSnapshotList = docs.map((doc) => ToDoSnapshot.fromMap(doc)).toList();
+          var toDoSnapshotList = snapshot.data as List<ToDoSnapshot>;
           numberOfTodo = toDoSnapshotList.length;
           return ListView.builder(
             itemCount: toDoSnapshotList.length,
@@ -189,8 +215,8 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
                     ],
                   ),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute
-                      (builder: (context) => AddNewTask(topic : item.toDoTask.topic),));
+                    // Navigator.push(context, MaterialPageRoute
+                    //   (builder: (context) => addNewTask(),));
                   },
                 ),
               );
