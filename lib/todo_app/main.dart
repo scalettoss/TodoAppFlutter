@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_final/Firebase/widget_connect_firebase.dart';
 import 'package:project_final/todo_app/controller/task_controller.dart';
+import 'package:project_final/todo_app/view/home_screen.dart';
 import 'package:project_final/todo_app/view/newhomescreen.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -29,8 +30,6 @@ class MyApp extends StatelessWidget {
             connectingMessage: "Đang kết nối",
 
             builder: (context) => const MyHomePage(title: "title")),
-
-            builder: (context) => HomeTodoApp(title: "Home Todo")),
 
         debugShowCheckedModeBanner: false,
       ),
@@ -82,7 +81,6 @@ Widget _homeListView(BuildContext context) {
     },
   );
 }
-=======
 //
 // class MyHomePage extends StatefulWidget {
 //   const MyHomePage({super.key, required this.title});
@@ -127,4 +125,4 @@ Widget _homeListView(BuildContext context) {
 //     },
 //   );
 // }
->>>>
+

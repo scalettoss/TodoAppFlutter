@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         home:MyFirebaseConnect(
             errorMessage: "Kết nối không thành công",
             connectingMessage: "Đang kết nối",
-            builder: (context) => HomeTodoApp()),
+            builder: (context) => const HomeTodoApp(title: 'To do',)),
         debugShowCheckedModeBanner: false,
       ),
     );
