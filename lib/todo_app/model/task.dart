@@ -6,7 +6,6 @@ class Task {
   bool isCompleted;
   Task({required this.name, this.isCompleted = false});
 }
-
 class ToDoTask{
   String? taskName, createBy;
   bool? isCompleted;
@@ -36,12 +35,12 @@ class ToDoTask{
 
   factory ToDoTask.fromJson(Map<String, dynamic> map) {
     return ToDoTask(
-      taskName: map['taskName'] as String,
-      createBy: map['createBy'] as String,
-      isCompleted: map['isCompleted'] as bool,
-      createAt: map['createAt'] as Timestamp,
-      topic: map['topic'] as String,
-      time: map['time'] as String,
+      taskName: map['taskName'] as String?,
+      createBy: map['createBy'] as String?,
+      isCompleted: map['isCompleted'] as bool?,
+      createAt: map['createAt'] as Timestamp?,
+      topic: map['topic'] as String?,
+      time: map['time'] as String?,
     );
   }
 }
