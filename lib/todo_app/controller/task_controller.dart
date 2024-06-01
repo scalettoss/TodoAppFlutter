@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_final/todo_app/model/task.dart';
 
-import '../view/home_screen.dart';
 
 class TaskController extends ChangeNotifier {
   String todoName = "";
@@ -48,46 +47,4 @@ class TodoController{
   void removeTask(TaskController todo) {
     list.remove(todo);
   }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("To do app"),
-      ),
-      body: Expanded(
-        child: _homeListView(context),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen(),));
-        },
-        child: const Text("+"),
-      ),
-    );
-  }
-}
-
-/// TODO: Cho tất cả các task trong một màn hình thành một đối tượng TaskController,
-/// cho tối đượng todo bằng list các taskController .
-/// Sau đó hiển thị ra màn hình
-Widget _homeListView(BuildContext context) {
-  // List<TaskController> tasks = Provider.of<TodoController>(context, listen: false).list;
-  List<String> tasks = ["A"];
-  return ListView.separated(
-      itemBuilder: (context, index) => ListTile(
-        title: Text(tasks[index]),
-      ),
-      separatorBuilder: (context, index) => const Divider(thickness: 5  ,),
-      itemCount: tasks.length
-  );
 }
