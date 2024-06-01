@@ -76,7 +76,7 @@ class _AddNewTaskState extends State<AddNewTask> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Tasks"),
+        title: const Text("Home Page"),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         actions: <Widget>[
           IconButton(
@@ -89,15 +89,54 @@ class _AddNewTaskState extends State<AddNewTask> {
       ),
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              children: [
+                Expanded(
+                    child: SizedBox(
+                      height: 55,
+                      width: MediaQuery.of(context).size.width,
+                      child: TextFormField(
+                        controller: txtnameTask,
+                        decoration: const InputDecoration(
+                          hintText: "Nhập nhiệm vụ mới",
+                        ),
+                        validator: (value){
+                          if (value == null || value.isEmpty) {
+                            return 'Vui lòng nhập nhiệm vụ';
+                          }
+                          return null;
+                        },
+                      ),
+                    )),
+                FloatingActionButton(
+                  onPressed: () {
+                    if(txtnameTask.text.isNotEmpty){
+                      String newtaskName = txtnameTask.text;
+                      FirebaseFirestore.instance.collection("ToDoDB").add({
+                        'taskName': newtaskName,
+                        'createBy': 'Bao',
+                        'createAt': DateTime.now(),
+                        'isCompleted': false,
+                      });
+                      txtnameTask.clear();
+                    }
+                  },
+                  child: const Icon(Icons.add),
+                ),
+              ],
+            ),
+          ),
           Expanded(
             child: StreamBuilder(
               stream: FirebaseFirestore.instance.collection("ToDoDB").snapshots(),
               builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError) {
-                  return Center(child: Text("Error Data"));
+                  return const Center(child: Text("Error Data"),);
                 }
                 if (!snapshot.hasData) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator(),);
                 }
 
                 var docs = snapshot.data!.docs;
