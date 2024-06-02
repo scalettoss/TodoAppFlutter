@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:project_final/todo_app/model/task.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:project_final/todo_app/view/todoScreen.dart';
+
 
 class HomeTodoApp extends StatefulWidget {
   const HomeTodoApp({super.key, required this.title});
@@ -215,8 +217,8 @@ class _HomeTodoAppState extends State<HomeTodoApp> {
                     ],
                   ),
                   onTap: () {
-                    // Navigator.push(context, MaterialPageRoute
-                    //   (builder: (context) => addNewTask(),));
+                    Navigator.push(context, MaterialPageRoute
+                      (builder: (context) => AddNewTask(topic: item.toDoTask.topic!),));
                   },
                 ),
               );

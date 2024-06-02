@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:project_final/Firebase/widget_connect_firebase.dart';
 import 'package:project_final/todo_app/controller/task_controller.dart';
-import 'package:project_final/todo_app/view/newhomescreen.dart';
+import 'package:project_final/todo_app/view/todoScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:project_final/todo_app/view/home_todo_app.dart';
+import 'package:project_final/todo_app/view/homeScreen.dart';
 
 
 void main() {
